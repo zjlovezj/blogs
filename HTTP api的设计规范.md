@@ -9,7 +9,7 @@ Roy Fielding的关于设计web services的论文，首次提出了ReST。
 
 1. URL来表示resource
 1. resource可以通过URI来定位
-1. URL由resource的名词组成，不应该包含动作/动词
+1. URL由resource的名词组成，不应该包含动作/动词。建议非query的部分字母小写。
 1. 应该使用复数来表示resource
 1. 使用GET/POST/PUT/DELETE来操作resource
 
@@ -27,9 +27,19 @@ Roy Fielding的关于设计web services的论文，首次提出了ReST。
 ## 错误处理
 采用http的status code来表示处理结果。用户只用熟悉一套状态码，而不是每一个产品的状态码。  
 每一个接口的返回状态都需要单独处理，而不是将返回数据传给业务逻辑。 
+制定一套errorcode方便定位错误。
+
 
 ## 健康检查
 检查一个URL，看返回值是否正确，比如 /health_check
+
+## api version:
+对于内部可控的api，特别是随时更新的产品（对于用户没有产品版本的概念，比如互联网产品），尽量保证无需api的版本，可维护性会好很多。  
+如果api有版本，需提前规划和设计。
+
+## auth
+在浏览器环境下，一般通过cookie来存储token等信息，因为它自带了失效时期等功能。  
+在其他环境一般通过HEADER或query加上api_secret来做认证。
 
 ## 思考
 ### 常用非REST方案
