@@ -9,3 +9,11 @@
 Electron应用的核心场景可能是本地，比如VS Code。或者Web。  
 基于此，程序员要面对2个世界，一个世界是NodeJs和Electron，另一个世界是Web。  
 这两者可以通过往Web世界里面注入JS来沟通？(ipcRenderer/ipcMain/remote待学习)，不要在Web里面直接访问NodeJs，这是很大的安全隐患。
+
+# Electron的文件目录结构
+
+1. NodeJs在哪里？
+2. npm包在哪里？
+3. source code在哪里？ electron/Electron.app/Contents/Resources/app/ 或 electron/resources/app。  
+   可以将package.json等文件放到这里，即可执行。
+   或者打包为asar。Electron对fs做了patch，可以把此包当成一个文件夹。
