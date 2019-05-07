@@ -24,6 +24,9 @@ websocket不是很新的技术，网络上的资料非常多，我这里记录�
 ## websocket重连？
 重连需要关闭吗？看起来不需要了，只是沿着创建的流程重新走一遍就可以了。
 
+## websocket认证？
+websocket不能设置header。但websocket在连接的第一步发出的是http请求，这里是有cookie的，所以可以根据cookie来认证，认证通过则connection建立。
+
 ## websocket的优势和代价？
 websocket就是长连接。  
 所谓长链接就是双方有记忆。  
