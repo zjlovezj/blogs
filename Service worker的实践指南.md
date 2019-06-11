@@ -12,3 +12,34 @@
 
 # 技术依赖@vue/cli@3.7(workbox@3.6.2)
 workbox最新版是4.x，相比3.x有breaking change，不过在本文中，没有根本性的影响。
+
+# 使用@vue/cli生成项目后，根据文档指引来配置pwa
+https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
+
+## 采用 generatesw 还是 injectmanifest ？
+采用 generatesw 的场景：(from https://developers.google.com/web/tools/workbox/modules/workbox-build)
+* When to use generateSW
+1. You want to precache files.
+1. You have simple runtime configuration needs (e.g. the configuration allows you to define routes and strategies).
+* When NOT to use generateSW
+1. You want to use other Service Worker features (i.e. Web Push).
+1. You want to import additional scripts or add additional logic.
+
+采用 injectmanifest 的场景：需要更复杂的控制
+
+## skipWaiting ？
+只在登录页才触发skipWaiting。因为某些页面是不能刷新的。  
+1. 在app scope通过workbox监听waiting事件。得到waiting事件即表明新的sw已经准备好了。
+1. 在登录页去触发skipWaiting事件。
+可以在window上标记是否有新的sw，把workbox附加到window上。  
+
+但因为我的应用是SPA，并且有登录页，可以采用简单方式来做。
+1. 因为只有在登录页有刷新的功能，所以可以在登录时检测app.[md5].js是否存在，如果不存在则刷新页面，要刷两次。
+1. workbox配置 skipWaiting: true, clientsClaim: true,
+
+## app shell ?
+因为我的应用必须通过网络来获取应用初始设置，即没有离线查看的需求和可能性，所以没有做app shell。  
+同时，因为网络是必须的，所以肯定可以获取index.html/js/css。
+
+
+
