@@ -37,9 +37,12 @@ https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
 1. 因为只有在登录页有刷新的功能，所以可以在登录时检测app.[md5].js是否存在，如果不存在则刷新页面，要刷两次。
 1. workbox配置 skipWaiting: true, clientsClaim: true,
 
-## app shell ?
+## offline and app shell ?
 因为我的应用必须通过网络来获取应用初始设置，即没有离线查看的需求和可能性，所以没有做app shell。  
 同时，因为网络是必须的，所以肯定可以获取index.html/js/css。
 
-
+## 测试
+@vue/cli不建议在测试环境下开启service worker，建议我们先做build之后再启用静态资源服务。  
+我尝试用serve(npm包)来做转发，但它的proxy很不好用。比如我想对符合 `/api/**` 路径的请求 转发到 `https://xxx:port/api/**` 看了文档，试了好久都没有成功。  
+后来通过http-server(npm包)很简单的就完成了。  
 
