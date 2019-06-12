@@ -46,3 +46,11 @@ https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
 我尝试用serve(npm包)来做转发，但它的proxy很不好用。比如我想对符合 `/api/**` 路径的请求 转发到 `https://xxx:port/api/**` 看了文档，试了好久都没有成功。  
 后来通过http-server(npm包)很简单的就完成了。  
 
+## service worker的开关
+因为service worker的资源被缓存，并且网络请求在本地被拦截处理，所以最糟的情况是发布了有bug的代码，但无法更新代码。  
+又或者是service worker相关的代码有bug，想暂停service worker。  
+注意：浏览器会在24小时后更新service worker代码，避免永远在旧代码中循环。  
+所以原则是永远有个请求能脱离浏览器的控制发向server。  
+对于我的应用来说，旧的js资源代码会在发布后被删除，所以我在登录时在这个资源路径上加上时间戳，通过head请求判断这个资源是否存在。  
+如果不存在，则有新版本发布，需要刷新页面获取新版本，记得要刷两次。  
+第一次刷新时通过localStorage添加标识，再次进入页面时查看此标识，做第二次刷新。  
