@@ -18,6 +18,15 @@ websocket不是很新的技术，网络上的资料非常多，我这里记录�
 这个时候，要有心跳，保证连接不断掉，比如浏览器发ping，等着接收服务器的pong.  
 然而还是可能断掉，或消息没有被接收，所以要能重连，重要消息必须等回执才能说发送成功。  
 
+## websoket的状态机(state machine)
+open(failed) -> error -> close(CloseEvent.code) 在这里去判断是否重连 (error总是导致close)  
+open(sucess) -> send/message -> close  
+open(sucess) -> send(failed? 应该仅在正常情况下发送)  
+client/server都可以调用close事件，onclose都会执行，通过code来判断(4000以上)  
+
+## websocket发送失败？
+websocket消息发送为确保成功，应该通过onmessage来保证服务器接收到消息。
+
 ## websocket超时？
 网络节点是可以设置超时的。send时超时是以onerror事件通知吗？
 
