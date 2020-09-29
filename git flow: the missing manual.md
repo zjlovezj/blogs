@@ -88,7 +88,7 @@ master 分支在 release/hotfix 分支测试完成以后，接收 release/hotfix
 1. 不在 feature 分支的 commit，应该加上前缀 feature-fix release-fix hot-fix
 1. 不要改写公共分支。改写公共分支一定要有充分的理由，并且让其他人可以正常操作。
 1. 某个 feature 在 develop 撤销时，有 develop 分支修改权限的人，可以通过 rebase 操作，将这个 feature 从 develop 完全清除。
-1. 新做一个 feature 的时候，要考虑这个 feature 有没有可以不启用后撤销，如果不启用，要考虑不启用的开关。
+1. 新做一个 feature 的时候，要考虑这个 feature 有没有可以不启用后撤销，如果不启用，要考虑不启用的开关。测试时，必须测试开关打开和关闭两种状态。必要时，将这个开关放置在管理后台UI控制。
 
 ## 分支与角色
 
