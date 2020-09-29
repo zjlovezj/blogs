@@ -162,6 +162,9 @@ git branch -u origin feature-login
 
 # 以最新的develop来rebase feature分支
 git fetch origin develop
+# 注意 rebase 与 merge 不一样。merge 是把两个分支的差异当做两个commit，只解决一次冲突，就产生一个merge commit。
+# rebase 在产生的冲突时，接收了 incomming changes 的话，那么当前的 branch 再有commit在相同行更改时，会需要再次解决冲突。
+# 所以 feature 分支可以先 squash 成少量的commit，后续就减少冲突了
 git rebase origin/develop feature-login
 
 # 将feature合并到develop分支
