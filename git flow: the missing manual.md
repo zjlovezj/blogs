@@ -47,8 +47,11 @@ feature 是开发者独享的临时分支，从 develop 切出来，在合适的
 如果是有全局影响的 feature，应该保证其他 feature 有办法再全局 feature 分支提交到 develop 上后 rebase，而不产生颠覆性改变。  
 feature 分支进 develop，应该总是以 develop 最新的 commit 为起点，但不是 fast forward 的（no-ff），
 即总是创建一个 merge commit，方便以后撤销这个 feature。  
+
 如果某个 feature 是实验性的，并且有办法轻易的被开启或关闭，则应该在代码里面加上 feature 开关。  
+
 某个 feature 被 revert 后，是不能重新 merge 的，需要 revert 上次的 revert。git revert -m 1 commitid // m 的作用是指那个分支是主分支  
+
 如果 feature 分支进 develop 后，要 fix bug？  
 原先的 feature 分支可以删除了，直接在 develop 上修复，并指明是那个 feature。
 
