@@ -44,7 +44,7 @@ develop 是最全的公共分支。
 feature 是开发者独享的临时分支，从 develop 切出来，在合适的时候 merge 回 develop。  
 **不准备在当前周期发布的 feature 分支不要 merge 到 develop。**  
 应该尽量避免同时开发**多个**互相有影响的 feature 分支，要么合并就在一个 feature 开发。  
-如果是有全局影响的 feature，应该保证其他 feature 有办法再全局 feature 分支提交到 develop 上后 rebase，而不产生颠覆性改变。  
+如果是有全局影响的 feature，应该保证其他 feature 有办法在全局 feature 分支提交到 develop 上后 rebase，而不产生颠覆性改变。  
 feature 分支进 develop，应该总是以 develop 最新的 commit 为起点，但不是 fast forward 的（no-ff），
 即总是创建一个 merge commit，方便以后撤销这个 feature。  
 
@@ -57,7 +57,7 @@ feature 分支进 develop，应该总是以 develop 最新的 commit 为起点�
 
 ### release 分支
 
-release 是为发布准备的临时分支，从 develop 切出来，供测试人员测试，同时修复测试期间的 bug，需要再往 develop 分支 merge。(git cherry-pick 或 git merge) （如果工作重心完全在 release 分支，则不妨得到 release 分支结束时再 merge，避免多次 merge。）
+release 是为发布准备的临时分支，从 develop 切出来，供测试人员测试，同时修复测试期间的 bug，需要再往 develop 分支 merge。(git cherry-pick 或 git merge) （如果工作重心完全在 release 分支，则不妨等到 release 分支结束时再 merge，避免多次 merge。）
 以 release 分支切出为起点，develop 分支可以接受下一个周期的 feature 分支，但在当前周期结束后再添加会更简单。
 
 ### master 分支
